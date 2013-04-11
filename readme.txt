@@ -1,0 +1,66 @@
+=== Simple Sticky Footer ===
+Contributors: almos20
+License: GPLv2 or later
+Donate link: http://sandorkovacs84.wordpress.com/
+Tags: sticky footer, advertising, div always on top, sticky div
+Requires at least: 3.1.0
+Tested up to: 3.5.1
+Stable tag: 1.0
+
+
+Simple Sticky Footer is a lightweight plugin, it allows to promote/advertise a WP Page (rich-text document)  as a sticky footer (always on top div). 
+
+== Description ==
+
+Instructions: First of all activate the plugin. 
+
+Step1: Create a new page. I suggest to add as title "Sticky Footer" 
+
+Step2: Go to the configuration page APPEARANCE -> SIMPLE STICKY FOOTER. 
+
+Step3: Select the page which will be shown on your website. 
+
+Step4(optional): Define a width, in most cases the width of your page. 
+
+Step5(optional): Define additional CSS rules like: rounded borders, gradient background, shadows, etc ... Do not use { }, just enter the css properties ex: background:gray;border-top:1px; 
+
+Have fun!
+
+PS: If you have usefull feature tip related to this plugin please write in the plugins support section.
+
+== Installation ==
+
+1. Install Simple Sticky Footer either via the WordPress.org plugin directory, or by uploading the files to your server
+2. Activate the plugin through the 'Plugins' menu in WordPress
+3. That's it. You're ready to go!
+
+== Frequently Asked Questions ==
+
+= Why I can't see the bottom part of the page ? =
+Sticky footer has a fixed position. It's recommended to define padding bottom for your body with the height of the sticky div. 
+Eg: Sticky footer height is 160px. You might define in your themes style.css :   body {padding: 160px;}
+
+
+= How can I customize 100% ? =
+If it is not enough the customizaton options from the administration panel, you should add extra CSS properties in your style.css from the active theme directory. 
+Of course you can add interactions in your theme's javascript file. 
+Sticky footer has 2 divs: 
+
+- container: #simple-sticky-footer-container
+
+- content:   #simple-sticky-footer
+
+== Screenshots ==
+
+1. Settings page.
+2. Front-end exampe.
+
+== Changelog ==
+
+= 1.0 =
+* First version.
+
+
+== Upgrade Notice ==
+No Upgrade Notice. This is the first release.
+
