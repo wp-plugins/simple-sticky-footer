@@ -5,7 +5,7 @@ Donate link: http://sandorkovacs84.wordpress.com/
 Tags: sticky footer, advertising, div always on top, sticky div
 Requires at least: 3.1.0
 Tested up to: 3.5.1
-Stable tag: 1.0
+Stable tag: 1.0.1
 
 
 Simple Sticky Footer is a lightweight plugin, it allows to promote/advertise a WP Page (rich-text document)  as a sticky footer (always on top div). 
@@ -38,7 +38,7 @@ PS: If you have usefull feature tip related to this plugin please write in the p
 
 = Why I can't see the bottom part of the page ? =
 Sticky footer has a fixed position. It's recommended to define padding bottom for your body with the height of the sticky div. 
-Eg: Sticky footer height is 160px. You might define in your themes style.css :   body {padding: 160px;}
+Eg: Sticky footer height is 160px. You might define in your themes style.css :   body {padding-bottom: 160px;}
 
 
 = How can I customize 100% ? =
