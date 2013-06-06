@@ -5,7 +5,7 @@ Donate link: http://sandorkovacs84.wordpress.com/
 Tags: sticky footer, advertising, div always on top, sticky div
 Requires at least: 3.1.0
 Tested up to: 3.5.1
-Stable tag: 1.0.1
+Stable tag: 1.1.0
 
 
 Simple Sticky Footer is a lightweight plugin, it allows to promote/advertise a WP Page (rich-text document)  as a sticky footer (always on top div). 
