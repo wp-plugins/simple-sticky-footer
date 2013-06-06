@@ -22,17 +22,22 @@ Step3: Select the page which will be shown on your website.
 
 Step4(optional): Define a width, in most cases the width of your page. 
 
-Step5(optional): Define additional CSS rules like: rounded borders, gradient background, shadows, etc ... Do not use { }, just enter the css properties ex: background:gray;border-top:1px; 
+Step5(optional): Define an animation effect. 
+
+Step6(optional): Define a delay. Sometimes you want to show the sticky footer after 10-15 seconds. Now you can do this.
+
+Step7(optional): Define additional CSS rules like: rounded borders, gradient background, shadows, etc ... Do not use { }, just enter the css properties ex: background:gray;border-top:1px; 
 
 Have fun!
 
-PS: If you have usefull feature tip related to this plugin please write in the plugins support section.
+PS: If you have useful feature tip related to this plugin please write in the plugins support section.
 
 == Installation ==
 
 1. Install Simple Sticky Footer either via the WordPress.org plugin directory, or by uploading the files to your server
 2. Activate the plugin through the 'Plugins' menu in WordPress
-3. That's it. You're ready to go!
+3. (optional) Configure the plugin settings in APPEARANCE -> STICKY FOOTER. 
+4. That's it. You're ready to go!
 
 == Frequently Asked Questions ==
 
@@ -56,6 +61,10 @@ Sticky footer has 2 divs:
 2. Front-end exampe.
 
 == Changelog ==
+
+= 1.1.0 =
+* Added delay configuration option
+* Added animation configuration option
 
 = 1.0 =
 * First version.
