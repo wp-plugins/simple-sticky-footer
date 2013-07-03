@@ -4,8 +4,8 @@ License: GPLv2 or later
 Donate link: http://sandorkovacs84.wordpress.com/
 Tags: sticky footer, advertising, div always on top, sticky div
 Requires at least: 3.1.0
-Tested up to: 3.5.1
-Stable tag: 1.1.0
+Tested up to: 3.5.2
+Stable tag: 1.2.0
 
 
 Simple Sticky Footer is a lightweight plugin, it allows to promote/advertise a WP Page (rich-text document)  as a sticky footer (always on top div). 
@@ -41,6 +41,16 @@ PS: If you have useful feature tip related to this plugin please write in the pl
 
 == Frequently Asked Questions ==
 
+= How can I add custom sticky footer wherever I want? = 
+Shortcode feature was added since v1.2.0. 
+
+Examples:
+
+1. Insert shortcode into a page/post - :  [simple_sf pid=900], where pid is the id of your (sticky footer) page. 
+2. Insert shortcode into a template file:  &lt;?php echo do_shortcode('[simple_sf pid=900]'); ?&gt;
+
+
+You might create as many sticky footers you want, and easily can integrate in any template file. 
 = Why I can't see the bottom part of the page ? =
 Sticky footer has a fixed position. It's recommended to define padding bottom for your body with the height of the sticky div. 
 Eg: Sticky footer height is 160px. You might define in your themes style.css :   body {padding-bottom: 160px;}
@@ -61,6 +71,9 @@ Sticky footer has 2 divs:
 2. Front-end exampe.
 
 == Changelog ==
+
+= 1.2.0 =
+* [New feature] Shortcode for Sticky Footer:  [simple_sf pid={page_id}]
 
 = 1.1.0 =
 * Added delay configuration option
