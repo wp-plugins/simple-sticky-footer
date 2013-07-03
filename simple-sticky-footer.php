@@ -4,7 +4,7 @@
   Plugin URI: http://www.sandorkovacs.ro/simple-sticky-footer-wordpress-plugin/
   Description: Lightweight Sticky Footer plugin
   Author: Sandor Kovacs
-  Version: 1.1.0
+  Version: 1.2.0
   Author URI: http://sandorkovacs.ro/
  */
 
@@ -80,6 +80,7 @@ function simple_sf_ban_callback() {
         update_option('simple_sf_hide', isset($_POST['simple_sf_hide']) ? 1 : 0 );
         update_option('simple_sf_delay', isset($_POST['simple_sf_delay']) ? $_POST['simple_sf_delay'] : 0 );
         update_option('simple_sf_effect', $_POST['simple_sf_effect']);
+        update_option('simple_sf_activate_shortcode', isset($_POST['simple_sf_activate_shortcode']) ? 1 : 0);
     }
 
     // read values from option table
@@ -90,6 +91,7 @@ function simple_sf_ban_callback() {
     $simple_sf_hide = (intval(get_option('simple_sf_hide')) == 1 ) ? 1 : 0;
     $simple_sf_delay = intval(get_option('simple_sf_delay')) ;
     $simple_sf_effect = get_option('simple_sf_effect', 'fade') ;
+    $simple_sf_activate_shortcode = get_option('simple_sf_activate_shortcode', 'fade') ;
     
     
     ?>
@@ -147,7 +149,7 @@ function simple_sf_ban_callback() {
             
             <p>
                 <label for='simple_sf_style'><strong><?php _e('Addition CSS Rules'); ?></strong></label> <br/>
-                <textarea name='simple_sf_style' id='simple-sf-style' cols="50" rows="20"><?php echo $style; ?></textarea>
+                <textarea name='simple_sf_style' id='simple-sf-style' cols="80" rows="10"><?php echo $style; ?></textarea>
                 <br/>
                 <small><?php _e('Here you can define addition CSS rules like: rounded borders, gradient background, shadows, etc ...  ') ?></small>
                 <br/>
@@ -164,6 +166,16 @@ function simple_sf_ban_callback() {
                 <br/>
                 <small><?php _e('If this box is checked the Sticky Footer will be a hidden div. It is usefull when you want to put some tracking scripts or other hidden HTML elements ') ?></small>
             <p>
+                
+
+            <p>
+                <label for='simple_sf_activate_shortcode'><strong><?php _e('I want to use shortcodes'); ?></strong></label> <br/>
+                <input  type='checkbox' name='simple_sf_activate_shortcode' id='simple-sf-activate-shortcode'  value='1' 
+                        <?php echo ($simple_sf_activate_shortcode == 1 ) ? " checked='checked'" : "" ?>         />
+                <br/>
+                <small><?php _e('If this box is checked the Sticky Footer will be showed only on the pages where the shortcodes were inserted.') ?></small>
+            <p>
+                
 
             <p>
                 <input type='submit' name='submit' value='<?php _e('Save') ?>' />
@@ -177,18 +189,83 @@ function simple_sf_ban_callback() {
     <?php
 }
 
-// Do the magic stuff
-function simple_sf() {
-    $pid = intval(get_option('simple_sf_pid'));
-    if ($pid < 1)
-        return '';
+/** Shortcode **/
 
-    $pid = get_option('simple_sf_pid');
+//
+//function foobar_func( $atts ){
+// return "foo and bar";
+//}
+function simple_sf_func($atts) {
+    
+    extract(shortcode_atts( array(
+       'pid' => 1    
+    ), $atts));
+    
     $width =  get_option('simple_sf_width');
     $hide =  get_option('simple_sf_hide');
     $style =  get_option('simple_sf_style');
     $delay =  get_option('simple_sf_delay');
+    $activate_shortcode =  get_option('simple_sf_activate_shortcode', 0);
     $effect = get_option('simple_sf_effect', 'fade') ;    
+        
+    
+    ob_start();
+// The Loop
+   $query = new WP_Query(array('page_id'=>$pid));
+
+    while ($query->have_posts()) :$query->the_post();
+        ?>
+
+        <div id="simple-sticky-footer-container">
+            <div id="simple-sticky-footer" 
+                 style="width: <?php echo $width; ?>; <?php echo ($hide == 1) ? 'display:none': '' ?>; <?php echo (!empty($style)) ? $style: ''?>;">
+              <?php the_content(); ?>
+            </div>
+        </div>
+
+<script>
+   delay = <?php echo $delay; ?> * 1000;
+   effect = '<?php echo $effect; ?>';
+   
+   jQuery(document).ready(function(){
+        setTimeout(function(){
+                    jQuery('#simple-sticky-footer-container').effect( effect, 500 );
+        },delay);
+   });  
+</script>
+
+        <?php
+    endwhile;
+    wp_reset_postdata();
+   
+    
+   $output_string = ob_get_contents();
+    ob_end_clean();
+    return $output_string;
+//        $output_string = 'sda';
+
+    return '';
+}
+
+
+add_shortcode( 'simple_sf', 'simple_sf_func' );
+
+// Do the magic stuff
+// Front-End 
+
+function simple_sf() {
+    $pid = intval(get_option('simple_sf_pid'));
+    if ($pid < 1)   return '';
+    
+    $width =  get_option('simple_sf_width');
+    $hide =  get_option('simple_sf_hide');
+    $style =  get_option('simple_sf_style');
+    $delay =  get_option('simple_sf_delay');
+    $activate_shortcode =  get_option('simple_sf_activate_shortcode', 0);
+    $effect = get_option('simple_sf_effect', 'fade') ;    
+    
+    // Do not display if the shortcode was activated for simple sticky footer
+    if ($activate_shortcode == 1) return '';
     
     $query = new WP_Query(array('page_id'=>$pid));
     // The Loop
@@ -207,9 +284,7 @@ function simple_sf() {
    effect = '<?php echo $effect; ?>';
    
    jQuery(document).ready(function(){
-       jQuery('#simple-sticky-footer-container').hide();
         setTimeout(function(){
-                    jQuery('#simple-sticky-footer-container').show();
                     jQuery('#simple-sticky-footer-container').effect( effect, 500 );
         },delay);
    });  
