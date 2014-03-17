@@ -4,8 +4,8 @@
   Plugin URI: http://www.sandorkovacs.ro/simple-sticky-footer-wordpress-plugin/
   Description: Lightweight Sticky Footer plugin
   Author: Sandor Kovacs
-  Version: 1.2.8
-  Author URI: http://sandorkovacs.ro/
+  Version: 1.2.9
+  Author URI: http://sandorkovacs.ro/en/
  */
 
 // Do the magic stuff
@@ -16,10 +16,14 @@ add_action('admin_init', 'simple_sf_ban_init');
 add_action('admin_menu', 'register_simple_sf_ban_submenu_page');
 
 function simple_sf_ban_init() {
+
+    wp_register_script('simple-sticky-footer', plugins_url('simple-sticky-footer.js', __FILE__));
+
     /* Register our stylesheet. */
     wp_register_style('simple-sticky-footer', plugins_url('simple-sticky-footer.css', __FILE__));
     wp_enqueue_style('simple-sticky-footer');
     
+    wp_dequeue_script('jquery');
     wp_enqueue_script('jquery');
     wp_enqueue_script('jquery-ui-core');
     wp_enqueue_script('jquery-effects-core');
@@ -36,9 +40,8 @@ function simple_sf_ban_init() {
     wp_enqueue_script('jquery-effects-shake');
     wp_enqueue_script('jquery-effects-slide');
     wp_enqueue_script('jquery-effects-transfer');
+    wp_enqueue_script('simple-sticky-footer');
 
-    
-    
 }
 
 function register_simple_sf_ban_submenu_page() {
@@ -191,10 +194,6 @@ function simple_sf_ban_callback() {
 
 /** Shortcode **/
 
-//
-//function foobar_func( $atts ){
-// return "foo and bar";
-//}
 function simple_sf_func($atts) {
     
     extract(shortcode_atts( array(
@@ -226,12 +225,6 @@ function simple_sf_func($atts) {
 <script>
    delay = <?php echo $delay; ?> * 1000;
    effect = '<?php echo $effect; ?>';
-   
-   jQuery(document).ready(function(){
-        setTimeout(function(){
-                    jQuery('#simple-sticky-footer-container').effect( effect, 500 );
-        },delay);
-   });  
 </script>
 
         <?php
@@ -282,12 +275,7 @@ function simple_sf() {
 <script>
    delay = <?php echo $delay; ?> * 1000;
    effect = '<?php echo $effect; ?>';
-   
-   jQuery(document).ready(function(){
-        setTimeout(function(){
-                    jQuery('#simple-sticky-footer-container').effect( effect, 500 );
-        },delay);
-   });  
+
 </script>
 
         <?php
