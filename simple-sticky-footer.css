@@ -10,6 +10,7 @@
     /*min-height: 80px;*/
     text-align:center;
     background: transparent;
+    z-index:999;
 }
 
 #simple-sticky-footer {
