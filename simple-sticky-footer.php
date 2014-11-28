@@ -4,7 +4,7 @@
   Plugin URI: http://www.sandorkovacs.ro/simple-sticky-footer-wordpress-plugin/
   Description: Lightweight Sticky Footer plugin
   Author: Sandor Kovacs
-  Version: 1.3.2
+  Version: 1.3.3
   Author URI: http://sandorkovacs.ro/en/
  */
 
@@ -77,11 +77,11 @@ function simple_sf_ban_callback() {
     
     // form submit  and save values
     if (isset($_POST['submit'])) {
-        update_option('simple_sf_pid', $_POST['page_id']);
-        update_option('simple_sf_width', $_POST['simple_sf_width']);
-        update_option('simple_sf_style', $_POST['simple_sf_style']);
+        update_option('simple_sf_pid', sanitize_text_field($_POST['page_id']));
+        update_option('simple_sf_width', sanitize_text_field($_POST['simple_sf_width']));
+        update_option('simple_sf_style', wp_kses($_POST['simple_sf_style']));
         update_option('simple_sf_hide', isset($_POST['simple_sf_hide']) ? 1 : 0 );
-        update_option('simple_sf_delay', isset($_POST['simple_sf_delay']) ? $_POST['simple_sf_delay'] : 0 );
+        update_option('simple_sf_delay', isset($_POST['simple_sf_delay']) ? sanitize_text_field($_POST['simple_sf_delay']) : 0 );
         update_option('simple_sf_effect', $_POST['simple_sf_effect']);
         update_option('simple_sf_activate_shortcode', isset($_POST['simple_sf_activate_shortcode']) ? 1 : 0);
     }
@@ -178,7 +178,8 @@ function simple_sf_ban_callback() {
                 <br/>
                 <small><?php _e('If this box is checked the Sticky Footer will be showed only on the pages where the shortcodes were inserted.') ?></small>
             <p>
-                
+        
+            <?php wp_nonce_field('stickyfooter', '_wpprotectfooter') ?>
 
             <p>
                 <input type='submit' name='submit' value='<?php _e('Save') ?>' />
