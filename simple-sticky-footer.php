@@ -76,7 +76,7 @@ function simple_sf_ban_callback() {
     
     
     // form submit  and save values
-    if (isset($_POST['submit'])) {
+    if (isset($_POST['_wpprotectfooter']) && wp_verify_nonce($_POST['_wpprotectfooter'],'stickyfooter')) {
         update_option('simple_sf_pid', sanitize_text_field($_POST['page_id']));
         update_option('simple_sf_width', sanitize_text_field($_POST['simple_sf_width']));
         update_option('simple_sf_style', wp_kses($_POST['simple_sf_style']));
