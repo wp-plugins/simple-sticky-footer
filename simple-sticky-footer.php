@@ -79,7 +79,7 @@ function simple_sf_ban_callback() {
     if (isset($_POST['_wpprotectfooter']) && wp_verify_nonce($_POST['_wpprotectfooter'],'stickyfooter')) {
         update_option('simple_sf_pid', sanitize_text_field($_POST['page_id']));
         update_option('simple_sf_width', sanitize_text_field($_POST['simple_sf_width']));
-        update_option('simple_sf_style', wp_kses($_POST['simple_sf_style']));
+        update_option('simple_sf_style', wp_kses($_POST['simple_sf_style']), array());
         update_option('simple_sf_hide', isset($_POST['simple_sf_hide']) ? 1 : 0 );
         update_option('simple_sf_delay', isset($_POST['simple_sf_delay']) ? sanitize_text_field($_POST['simple_sf_delay']) : 0 );
         update_option('simple_sf_effect', $_POST['simple_sf_effect']);
