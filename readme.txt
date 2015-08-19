@@ -4,7 +4,7 @@ License: GPLv2 or later
 Donate link: http://www.sandorkovacs.ro/en/
 Tags: sticky footer, advertising, div always on top, sticky div
 Requires at least: 3.1.0
-Tested up to: 4.2.1
+Tested up to: 4.3.0
 Stable tag: 1.3.5
 
 
@@ -73,6 +73,7 @@ Sticky footer has 2 divs:
 == Changelog ==
 
 = 1.3.5 = 
+* [Test] WordPress 4.3.0
 * [Test] WordPress 4.2.1
 
 = 1.3.4 = 
